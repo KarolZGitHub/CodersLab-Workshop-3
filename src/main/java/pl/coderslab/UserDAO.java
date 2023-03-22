@@ -30,13 +30,14 @@ public class UserDAO {
         final String READ_USER_QUERY = "SELECT * FROM users WHERE id=?";
         try (Connection connection = DbUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(READ_USER_QUERY);
+            statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getInt(1));
                 user.setName(resultSet.getString(2));
-                user.setPassword(resultSet.getString(3));
-                user.setEmail(resultSet.getString(4));
+                user.setPassword(resultSet.getString(4));
+                user.setEmail(resultSet.getString(3));
                 return user;
             }
         } catch (SQLException e) {
@@ -60,11 +61,12 @@ public class UserDAO {
         return null;
     }
 
-    public void printUser(User user) {
+    public String printUser(User user) {
         int id = user.getId();
         String name = user.getName();
         String email = user.getEmail();
         String read = "id= " + id + " name= " + name + " email= " + email;
+        return read;
     }
 
     public void deleteUser(int userId) {
@@ -72,6 +74,7 @@ public class UserDAO {
         try (Connection connection = DbUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(DELETE_USER_QUERY);
             statement.setInt(1, userId);
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -85,10 +88,10 @@ public class UserDAO {
             ArrayList<User> users = new ArrayList<>();
             while (resultSet.next()) {
                 User user = new User();
-                user.setId(resultSet.getInt(1));
-                user.setName(resultSet.getString(2));
-                user.setPassword(resultSet.getString(3));
-                user.setEmail(resultSet.getString(4));
+                user.setId(resultSet.getInt("id"));
+                user.setName(resultSet.getString("userName"));
+                user.setEmail(resultSet.getString("email"));
+                user.setPassword(resultSet.getString("password"));
                 users.add(user);
             }
             return users;
