@@ -1,4 +1,4 @@
-package pl.coderslab.user;
+package pl.coderslab.http;
 
 import javax.servlet.*;
 import javax.servlet.annotation.*;
