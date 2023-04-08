@@ -1,4 +1,7 @@
-package pl.coderslab;
+package pl.coderslab.user;
+
+import pl.coderslab.DbUtil;
+import pl.coderslab.user.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

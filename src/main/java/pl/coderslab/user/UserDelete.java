@@ -1,7 +1,5 @@
 package pl.coderslab.user;
 
-import pl.coderslab.UserDAO;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
